@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jawaban UAS Sistem Operasi</title>
+
+<!-- Feather Icons -->
+<script src="https://unpkg.com/feather-icons"></script>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #eef1f7;
+        padding: 40px 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #2b2d42;
+        font-size: 32px;
+        letter-spacing: 1px;
+    }
+
+    .faq-container {
+        max-width: 950px;
+        margin: auto;
+    }
+
+    .faq-item {
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+        transition: transform 0.2s ease;
+    }
+    .faq-item:hover {
+        transform: translateY(-3px);
+    }
+
+    .faq-question {
+        cursor: pointer;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #2b2d42;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 20px;
+        font-size: 15px;
+        line-height: 1.7;
+        color: #444;
+        background: #fafafa;
+        border-top: 1px solid #eee;
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const items = document.querySelectorAll('.faq-item');
+
+        items.forEach(item => {
+            item.querySelector(".faq-question").addEventListener("click", () => {
+                const answer = item.querySelector(".faq-answer");
+                const icon = item.querySelector(".faq-icon");
+
+                const isOpen = answer.style.display === "block";
+
+                // Tutup semua
+                document.querySelectorAll(".faq-answer").forEach(a => a.style.display = "none");
+                document.querySelectorAll(".faq-icon").forEach(i => i.style.transform = "rotate(0deg)");
+
+                // Buka kalau belum terbuka
+                if (!isOpen) {
+                    answer.style.display = "block";
+                    icon.style.transform = "rotate(90deg)";
+                }
+            });
+        });
+    });
+</script>
+
+</head>
+<body>
+
+<h1>Jawaban UAS Sistem Operasi</h1>
+
+<div class="faq-container">
+
+
+
+    <!-- ===========================
+         1. Layered vs Client Server
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>1. Perbedaan Layered Approach vs Client-Server</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>Layered Approach</b> adalah struktur OS yang dibangun per-layer (Lapisan 0, 1, 2, dst) di mana tiap layer hanya berkomunikasi dengan layer di atas dan bawahnya.<br><br>
+
+            <b>Kelebihan:</b><br>
+            • Struktur lebih rapi & mudah dipahami.<br>
+            • Debugging mudah karena tiap layer terisolasi.<br>
+            • Keamanan lebih kuat karena tiap layer punya batasan akses.<br><br>
+
+            <b>Kekurangan:</b><br>
+            • Implementasi kompleks karena layer harus terurut.<br>
+            • Kinerja lebih lambat karena banyak overhead antar-layer.<br><br>
+
+            <b>Model Client-Server</b> memisahkan sistem menjadi dua bagian besar: client (pengguna) dan server (penyedia layanan).<br><br>
+
+            <b>Kelebihan:</b><br>
+            • Skalabilitas sangat baik (server bisa ditambah).<br>
+            • Keamanan data lebih mudah dikontrol di server.<br>
+            • Resource dapat dibagi ke banyak client.<br><br>
+
+            <b>Kekurangan:</b><br>
+            • Bergantung pada jaringan.<br>
+            • Jika server down → semua client terdampak.<br>
+            • Beban berat ada di server.<br><br>
+
+            <b>Kesimpulan:</b> Layered lebih bagus untuk desain OS internal, sedangkan client-server cocok untuk sistem terdistribusi.
+        </div>
+    </div>
+
+
+
+    <!-- ===========================
+         2. Siklus Hidup Proses
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>2. Siklus Hidup Proses & Peran PCB</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>Lima State Proses:</b><br>
+            1. New – proses baru dibuat.<br>
+            2. Ready – menunggu giliran menggunakan CPU.<br>
+            3. Running – sedang diproses oleh CPU.<br>
+            4. Waiting – menunggu event/IO.<br>
+            5. Terminated – proses selesai dieksekusi.<br><br>
+
+            <b>PCB (Process Control Block)</b> berisi seluruh informasi proses:<br>
+            • Register CPU<br>
+            • Program counter<br>
+            • State proses<br>
+            • Informasi memori<br>
+            • Hak akses & informasi I/O<br><br>
+
+            <b>Context Switch</b> terjadi saat CPU berpindah dari satu proses ke proses lain.<br><br>
+
+            <b>Dampak:</b><br>
+            • Menambah overhead.<br>
+            • Terlalu sering swap → menurunkan performa.<br>
+            • Namun penting untuk multitasking.
+        </div>
+    </div>
+
+
+
+    <!-- ===========================
+         3. Thread
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>3. Konsep Thread & Model Multithreading</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>Thread</b> adalah unit terkecil dari eksekusi dalam proses.<br><br>
+
+            <b>Komponen Thread:</b><br>
+            • Program counter<br>
+            • Register<br>
+            • Stack<br><br>
+
+            <b>Perbedaan Proses vs Thread:</b><br>
+            • Proses → heavyweight (punya memori sendiri).<br>
+            • Thread → lightweight (share memori dengan proses lain).<br><br>
+
+            <b>Model Multithreading:</b><br>
+            <b>1. Many-to-One:</b><br>
+            • Banyak thread → 1 kernel thread.<br>
+            • Efisien tapi tidak bisa multicore.<br><br>
+
+            <b>2. One-to-One:</b><br>
+            • 1 thread user = 1 thread kernel.<br>
+            • Multicore jalan, tapi boros resource.<br><br>
+
+            <b>3. Many-to-Many:</b><br>
+            • Banyak thread user → beberapa thread kernel.<br>
+            • Fleksibel dan efisien.
+        </div>
+    </div>
+
+
+
+    <!-- ===========================
+         4. CPU Scheduling
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>4. CPU Scheduling & Perbedaan Scheduler</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>Tujuan CPU Scheduling:</b><br>
+            • Meningkatkan utilisasi CPU<br>
+            • Mempercepat waktu respon<br>
+            • Optimalkan throughput<br>
+            • Meminimalkan waiting time<br><br>
+
+            <b>Terminologi:</b><br>
+            • Burst Time → waktu CPU yang dibutuhkan proses<br>
+            • Turnaround Time → total waktu dari mulai hingga selesai<br>
+            • Waiting Time → waktu menunggu di ready queue<br><br>
+
+            <b>Jenis Scheduler:</b><br>
+            • Long-Term → memilih proses masuk ke memori utama<br>
+            • Medium-Term → melakukan swapping (suspend/resume)<br>
+            • Short-Term → memilih proses yang dieksekusi CPU<br><br>
+
+            <b>Empat Algoritma:</b><br><br>
+
+            <b>1. FCFS</b><br>
+            + Mudah diimplementasi<br>
+            – Lama jika ada CPU burst panjang (convoy effect)<br><br>
+
+            <b>2. SJF</b><br>
+            + Waiting time paling kecil<br>
+            – Perlu prediksi burst time<br><br>
+
+            <b>3. Priority Scheduling</b><br>
+            + Penting untuk proses prioritas tinggi<br>
+            – Risiko starvation<br><br>
+
+            <b>4. Round Robin</b><br>
+            + Paling fair untuk sistem multitasking<br>
+            – Terlalu kecil quantum → banyak context switch
+        </div>
+    </div>
+
+
+
+    <!-- ===========================
+         5. Sinkronisasi
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>5. Sinkronisasi Proses & Masalah Klasik</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>Syarat Critical Section:</b><br>
+            • Mutual exclusion<br>
+            • Progress<br>
+            • Bounded waiting<br><br>
+
+            <b>Masalah Klasik:</b><br><br>
+
+            <b>1. Producer–Consumer:</b> Produsen membuat item, konsumen mengambil. Harus sinkron agar buffer tidak penuh/kosong.<br><br>
+
+            <b>2. Dining Philosophers:</b> Filosof rebutan garpu → potensi deadlock.<br><br>
+
+            <b>3. Readers–Writers:</b> Banyak reader boleh akses bersamaan, writer harus eksklusif.
+        </div>
+    </div>
+
+
+
+    <!-- ===========================
+         6. Deadlock
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>6. Konsep Deadlock & Penanganannya</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>Deadlock</b> adalah kondisi di mana proses saling menunggu resource sehingga tidak ada yang bisa lanjut.<br><br>
+
+            <b>Syarat Deadlock:</b><br>
+            1. Mutual Exclusion<br>
+            2. Hold and Wait<br>
+            3. No Preemption<br>
+            4. Circular Wait<br><br>
+
+            <b>Contoh:</b><br>
+            • Dua proses saling menunggu lock file berbeda.<br>
+            • Printer & scanner dipakai silang oleh dua aplikasi.<br><br>
+
+            <b>Penanganan:</b><br><br>
+
+            <b>1. Pencegahan</b> → hilangkan salah satu syarat deadlock.<br>
+            <b>2. Penghindaran</b> → contoh algoritma banker.<br>
+            <b>3. Deteksi & Pemulihan</b> → cek siklus & kill proses.<br>
+            <b>4. Mengabaikan</b> → dipakai Linux/Windows (jarang terjadi).
+        </div>
+    </div>
+
+
+
+    <!-- ===========================
+         7. Manajemen Media Penyimpanan
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>7. Manajemen Media Penyimpanan</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>Fungsi Manajemen Penyimpanan:</b><br>
+            • Mengatur alokasi file<br>
+            • Menangani fragmentasi<br>
+            • Melindungi keamanan data<br>
+            • Menjamin keandalan penyimpanan<br><br>
+
+            <b>Media:</b><br>
+            • HDD → raw file system + fragmentasi besar<br>
+            • SSD → wear leveling, block management<br>
+            • Cloud → redundancy, replication, permission access
+        </div>
+    </div>
+
+
+
+    <!-- ===========================
+         8. Teknik Alokasi
+    ============================ -->
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>8. Alokasi Kontigu, Linked, Indexed</span>
+            <i data-feather="chevron-right" class="faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+            <b>1. Alokasi Kontigu</b><br>
+            • File disimpan berurutan.<br>
+            + Akses cepat<br>
+            – Fragmentasi eksternal<br>
+            Cocok untuk: video, file besar.<br><br>
+
+            <b>2. Linked Allocation</b><br>
+            • Tiap blok berisi pointer ke blok berikutnya.<br>
+            + Tidak ada fragmentasi eksternal<br>
+            – Tidak cocok untuk random access<br>
+            Cocok untuk: log file.<br><br>
+
+            <b>3. Indexed Allocation</b><br>
+            • Ada blok indeks berisi daftar alamat blok file.<br>
+            + Random access cepat<br>
+            – Bisa boros blok indeks<br>
+            Cocok untuk: OS modern & file system besar (NTFS).
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    feather.replace();
+</script>
+
+</body>
+</html>
